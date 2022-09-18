@@ -1,13 +1,24 @@
 <?php
+      include("../../../template/header.php");
+      include "../../../config/db.php";
 
-    if(isset($_GET['id']) && $_GET['id'] != NULL){
+      if(isset($_SESSION['username'])){
+  $username = $_SESSION['username'];
+  $password = $_SESSION['password'];
+
+
+    if(isset($_GET['id']) ){
       $id = $_GET['id'];
    
-      include("../../../template/header.php");
+      
       $conn = mysqli_connect($hostname, $username, $password, $db_name);
       $sql = "SELECT d.doctor_id,d.dea_no,e.name,e.address, e.contact_no, m.council_regno, m.joined_date, m.resign_date FROM doctor d, employee e, medical_staff m WHERE d.doctor_id = 2 AND d.emp_id = e.emp_id AND d.emp_id = m.emp_id;";
       $result = mysqli_query($conn, $sql);
-
+      if(mysqli_num_rows($result)>0){
+        $row = mysqli_fetch_assoc($result);
+           
+        
+    
 
 ?>
 
@@ -91,7 +102,7 @@ input[type=submit]:hover {
       <label for="name">Name</label>
     </div>
     <div class="col-75">
-      <input type="text" id="name" name="name" placeholder="Name..">
+      <input type="text" id="name" name="name" placeholder="Name.." value="<?=$row['name']?>">
     </div>
   </div>
   <div class="row">
@@ -99,7 +110,7 @@ input[type=submit]:hover {
       <label for="address">Address</label>
     </div>
     <div class="col-75">
-      <input type="text" id="address" name="address" placeholder="Address..">
+      <input type="text" id="address" name="address" placeholder="Address.." value="<?=$row['address']?>" >
     </div>
   </div>
   <div class="row">
@@ -107,7 +118,7 @@ input[type=submit]:hover {
       <label for="mobile">Mobile number</label>
     </div>
     <div class="col-75">
-      <input type="text" id="mobile" name="mobile" placeholder="Mobile number..">
+      <input type="text" id="mobile" name="mobile" placeholder="Mobile number.." value="<?=$row['contact_no']?>" >
     </div>
   </div>
 
@@ -116,7 +127,7 @@ input[type=submit]:hover {
       <label for="council">Medical council registration number</label>
     </div>
     <div class="col-75">
-      <input type="text" id="council" name="council" placeholder="Medical council registration number..">
+      <input type="text" id="council" name="council" placeholder="Medical council registration number.." value="<?=$row['council_regno']?>">
     </div>
   </div>
 
@@ -125,7 +136,7 @@ input[type=submit]:hover {
       <label for="joined_date">Joined date</label>
     </div>
     <div class="col-75">
-      <input type="date" id="joined_date" name="jdate" >
+      <input type="date" id="joined_date" name="jdate" value="<?=$row['joined_date']?>">
     </div>
   </div>
   <div class="row">
@@ -133,7 +144,7 @@ input[type=submit]:hover {
       <label for="resign_date">Resign date</label>
     </div>
     <div class="col-75">
-      <input type="date" id="resign_date" name="rdate" >
+      <input type="date" id="resign_date" name="rdate"  value="<?=$row['resign_date']?>">
     </div>
   </div>
 
@@ -142,7 +153,7 @@ input[type=submit]:hover {
       <label for="dea">DEA number</label>
     </div>
     <div class="col-75">
-      <input type="text" id="dea" name="dea" placeholder="DEA number..">
+      <input type="text" id="dea" name="dea" placeholder="DEA number.." value="<?=$row['dea_no']?>" >
     </div>
   </div>
 
@@ -172,10 +183,16 @@ input[type=submit]:hover {
 
 
 include("../../../template/footer.php");
+      }
+    }
+
+
+
+  }else { 
+    header("Location: /login.php");
 
     }
 
 
 
-
-?>
+    ?>
