@@ -6,7 +6,7 @@ if(isset($_SESSION['username'])){
     $username = $_SESSION['username'];
     $password = $_SESSION['password'];
 
-    if (isset($_POST['name']) && isset($_POST['address']) && isset($_POST['mobile']) && isset($_POST['dea'])) {
+    if (isset($_POST['name']) && isset($_POST['address']) && isset($_POST['mobile']) && isset($_POST['dea']) && isset($_POST['council']) && isset($_POST['jdate']) && isset($_POST['rdate']) && isset($_POST['id']) ){
 
         function test_input($data) {
         $data = trim($data);
@@ -22,6 +22,7 @@ if(isset($_SESSION['username'])){
     $council = test_input($_POST['council']);
     $jdate = $_POST['jdate'];
     $rdate = $_POST['rdate'];
+    $id = $_POST['id'];
 
 	if (empty($name) || empty($address) || empty($mobile) || empty($dea)) {
 		header("Location: ../login.php?error=All data are Required");
@@ -31,21 +32,15 @@ if(isset($_SESSION['username'])){
         if($conn){
             // Check connection
             echo "Connected to database";
+            $sql = "UPDATE employee SET name='$name', address='$address',contact_no = '$mobile' WHERE emp_id = '$id'";
+            $sql1 = "UPDATE medical_staff SET council_regno='$council',joined_date='$jdate', resign_date = '$rdate' WHERE emp_id = '$id'";
+            $sql2 = "UPDATE doctor SET dea_no='$dea' WHERE emp_id = '$id'";
+            // $sql = "INSERT INTO employee (name, address, contact_no) VALUES ('$name', '$address', '$mobile')";
+            if(mysqli_query($conn, $sql) && mysqli_query($conn, $sql1) && mysqli_query($conn, $sql2)){
+                echo "Success";
+                header("Location: ../view/view.php");
 
-            $sql = "INSERT INTO employee (name, address, contact_no) VALUES ('$name', '$address', '$mobile')";
-            if(mysqli_query($conn, $sql)){
-                $emp_id = mysqli_insert_id($conn);
-                $sql1 = "INSERT INTO medical_staff (council_regno,joined_date,resign_date,emp_id) VALUES ('$council','$jdate','$rdate','$emp_id')";
-                $sql2 = "INSERT INTO doctor(dea_no,emp_id) VALUES ('$dea', '$emp_id')";
-                if(mysqli_query($conn, $sql1) && mysqli_query($conn, $sql2)){
-
-                    echo "Success";
-                }else{
-                    echo    "Error";
-                }
-            header("Location: /db/index.php");
-
-        }
+            }
         else{   
             echo "Error";
 

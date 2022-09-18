@@ -43,7 +43,7 @@ if(isset($_SESSION['username'])){
                 }else{
                     echo    "Error";
                 }
-            header("Location: /db/index.php");
+                header("Location: ../view/view.php");
 
         }
         else{   

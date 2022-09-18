@@ -6,7 +6,7 @@
     include "../../../config/db.php";
 
     $conn = mysqli_connect($hostname, $username, $password, $db_name);
-    $sql = "SELECT d.doctor_id,d.dea_no,e.name, e.contact_no FROM doctor d, employee e WHERE d.emp_id = e.emp_id;";
+    $sql = "SELECT d.doctor_id,d.dea_no,e.name, e.contact_no, e.emp_id FROM doctor d, employee e WHERE d.emp_id = e.emp_id;";
     $result = mysqli_query($conn, $sql);
 
 ?>
@@ -40,12 +40,17 @@
 
 <h1>Doctors</h1>
 
+<a href="../insert/form.php">Insert</a >
+<br />
+<br />
+
 <table id="doctor">
   <tr>
     <th>ID</th>
     <th>Name</th>
     <th>DEA No</th>
     <th>Mobile</th>
+
 
   </tr>
   <?php 
@@ -56,6 +61,8 @@
             echo "<td><a href='doctor.php?doctor_id=".$row['doctor_id']."'>".$row['name']."</a></td>";
             echo "<td>".$row['dea_no']."</td>";
             echo "<td>".$row['contact_no']."</td>";
+            echo "<td><a href='../update/form.php?id=".$row['doctor_id']."'>Update</a></td>";
+            echo "<td><a href='../delete/delete.php?id=".$row['emp_id']."'>Delete</a></td>";
             echo "</tr>";
         }
     }
