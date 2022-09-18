@@ -1,7 +1,7 @@
 <?php
 // mysql
 //  $database = "suwasahana";
-$db_name = "my_db";
+$db_name = "suwasahana";
 $uname = "nirmal";
 $passwd = "root";
 $hostname = "localhost";
