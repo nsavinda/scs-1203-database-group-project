@@ -1,7 +1,7 @@
 <?php
 // include './config/db.php';
 session_start();
-if(isset($_SESSION['username']) && isset($_SESSION['id']) ) { 
+if(isset($_SESSION['username']) ) { 
     $username = $_SESSION['username'];
 
     ?>
