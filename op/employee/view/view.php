@@ -62,7 +62,7 @@ button{
 </style>
 
 
-<h1>Doctors</h1>
+<h1>Employee</h1>
 
 <a href="../insert/form.php"><div id="button"><button>Insert</button></div></a >
 <br />

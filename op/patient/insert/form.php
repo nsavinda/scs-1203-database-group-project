@@ -84,7 +84,7 @@ h1{
 
 
 
-<h1>Doctor</h1>
+<h1>Patients</h1>
 
 <div class="container">
   <form action="insert.php" method="POST">
@@ -96,7 +96,7 @@ h1{
       <input type="text" id="name" name="name" placeholder="Name..">
     </div>
   </div>
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-25">
       <label for="address">Address</label>
     </div>
@@ -120,31 +120,40 @@ h1{
     <div class="col-75">
       <input type="text" id="council" name="council" placeholder="Medical council registration number..">
     </div>
+  </div> -->
+
+  <div class="row">
+    <div class="col-25">
+      <label for="joined_date">Admitted date</label>
+    </div>
+    <div class="col-75">
+      <input type="date" id="joined_date" name="admitted_date" >
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for="resign_date">Admitted time</label>
+    </div>
+    <div class="col-75">
+      <input type="time" id="resign_date" name="admitted_time" >
+    </div>
   </div>
 
   <div class="row">
     <div class="col-25">
-      <label for="joined_date">Joined date</label>
+      <label for="dea">Ward no</label>
     </div>
     <div class="col-75">
-      <input type="date" id="joined_date" name="jdate" >
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-25">
-      <label for="resign_date">Resign date</label>
-    </div>
-    <div class="col-75">
-      <input type="date" id="resign_date" name="rdate" >
+      <input type="text" id="ward_no" name="ward_no" placeholder="Ward no">
     </div>
   </div>
 
   <div class="row">
     <div class="col-25">
-      <label for="dea">DEA number</label>
+      <label for="dea">Bed no</label>
     </div>
     <div class="col-75">
-      <input type="text" id="dea" name="dea" placeholder="DEA number..">
+      <input type="text" id="Bed_no" name="bed_id" placeholder="bed no">
     </div>
   </div>
 

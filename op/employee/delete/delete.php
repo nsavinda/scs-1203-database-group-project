@@ -1,0 +1,21 @@
+<?php  
+session_start();
+include "../../../config/db.php";
+
+if(isset($_SESSION['username'])){
+    $username = $_SESSION['username'];
+    $password = $_SESSION['password'];
+
+    if(isset($_GET['id']) && !empty($_GET['id'])){
+
+    $sql = "DELETE FROM employee WHERE emp_id = '{$_GET['id']}';";
+    $conn = mysqli_connect($hostname, $username, $password, $db_name);
+    if(mysqli_query($conn, $sql)){
+        echo 'success';
+        header("Location: ../view/view.php");
+    }
+    else{
+        echo 'invalid id';
+    }
+    }
+}

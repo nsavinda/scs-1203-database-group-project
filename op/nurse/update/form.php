@@ -1,8 +1,24 @@
 <?php
+      include("../../../template/header.php");
+      include "../../../config/db.php";
+
+      if(isset($_SESSION['username'])){
+  $username = $_SESSION['username'];
+  $password = $_SESSION['password'];
 
 
-    include("../../../template/header.php");
-
+    if(isset($_GET['id']) ){
+      $id = $_GET['id'];
+   
+      
+      $conn = mysqli_connect($hostname, $username, $password, $db_name);
+      $sql = "SELECT d.doctor_id,d.dea_no,e.emp_id ,e.name,e.address, e.contact_no, m.council_regno, m.joined_date, m.resign_date FROM doctor d, employee e, medical_staff m WHERE d.doctor_id = $id AND d.emp_id = e.emp_id AND d.emp_id = m.emp_id;";
+      $result = mysqli_query($conn, $sql);
+      if(mysqli_num_rows($result)>0){
+        $row = mysqli_fetch_assoc($result);
+           
+        
+    
 
 ?>
 
@@ -28,7 +44,7 @@ label {
 }
 
 input[type=submit] {
-  background-color: #1E5162;
+  background-color: #04AA6D;
   color: white;
   padding: 12px 20px;
   border: none;
@@ -38,8 +54,7 @@ input[type=submit] {
 }
 
 input[type=submit]:hover {
-  background-color: #ADD8E6;
-  color: #1E5162;
+  background-color: #45a049;
 }
 
 .container {
@@ -50,7 +65,7 @@ input[type=submit]:hover {
 
 .col-25 {
   float: left;
-  width: 15%;
+  width: 25%;
   margin-top: 6px;
 }
 
@@ -66,12 +81,6 @@ input[type=submit]:hover {
   display: table;
   clear: both;
 }
-h1{
-  padding-left:12px;
-}
-#but{
-  padding-right:10%;
-}
 
 /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 600px) {
@@ -84,16 +93,17 @@ h1{
 
 
 
-<h1>Doctor</h1>
+<h2>Nurses</h2>
 
 <div class="container">
-  <form action="insert.php" method="POST">
+  <form action="update.php" method="POST">
+  <input type="hidden" id="id" name="id" value="<?=$row['emp_id']?>">
   <div class="row">
     <div class="col-25">
       <label for="name">Name</label>
     </div>
     <div class="col-75">
-      <input type="text" id="name" name="name" placeholder="Name..">
+      <input type="text" id="name" name="name" placeholder="Name.." value="<?=$row['name']?>">
     </div>
   </div>
   <div class="row">
@@ -101,7 +111,7 @@ h1{
       <label for="address">Address</label>
     </div>
     <div class="col-75">
-      <input type="text" id="address" name="address" placeholder="Address..">
+      <input type="text" id="address" name="address" placeholder="Address.." value="<?=$row['address']?>" >
     </div>
   </div>
   <div class="row">
@@ -109,7 +119,7 @@ h1{
       <label for="mobile">Mobile number</label>
     </div>
     <div class="col-75">
-      <input type="text" id="mobile" name="mobile" placeholder="Mobile number..">
+      <input type="text" id="mobile" name="mobile" placeholder="Mobile number.." value="<?=$row['contact_no']?>" >
     </div>
   </div>
 
@@ -118,7 +128,7 @@ h1{
       <label for="council">Medical council registration number</label>
     </div>
     <div class="col-75">
-      <input type="text" id="council" name="council" placeholder="Medical council registration number..">
+      <input type="text" id="council" name="council" placeholder="Medical council registration number.." value="<?=$row['council_regno']?>">
     </div>
   </div>
 
@@ -127,7 +137,7 @@ h1{
       <label for="joined_date">Joined date</label>
     </div>
     <div class="col-75">
-      <input type="date" id="joined_date" name="jdate" >
+      <input type="date" id="joined_date" name="jdate" value="<?=$row['joined_date']?>">
     </div>
   </div>
   <div class="row">
@@ -135,7 +145,7 @@ h1{
       <label for="resign_date">Resign date</label>
     </div>
     <div class="col-75">
-      <input type="date" id="resign_date" name="rdate" >
+      <input type="date" id="resign_date" name="rdate"  value="<?=$row['resign_date']?>">
     </div>
   </div>
 
@@ -144,7 +154,7 @@ h1{
       <label for="dea">DEA number</label>
     </div>
     <div class="col-75">
-      <input type="text" id="dea" name="dea" placeholder="DEA number..">
+      <input type="text" id="dea" name="dea" placeholder="DEA number.." value="<?=$row['dea_no']?>" >
     </div>
   </div>
 
@@ -157,7 +167,7 @@ h1{
     </div>
   </div> -->
   <br>
-  <div class="row" id="but">
+  <div class="row">
     <input type="submit" value="Submit">
   </div>
   </form>
@@ -169,13 +179,21 @@ h1{
 
 
 
-<?
+<?php
 
 
 
 include("../../../template/footer.php");
+      }
+    }
 
 
 
+  }else { 
+    header("Location: /login.php");
 
-?>
+    }
+
+
+
+    ?>

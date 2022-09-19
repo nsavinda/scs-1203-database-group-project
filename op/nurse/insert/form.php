@@ -84,7 +84,7 @@ h1{
 
 
 
-<h1>Doctor</h1>
+<h1>Nurses</h1>
 
 <div class="container">
   <form action="insert.php" method="POST">
