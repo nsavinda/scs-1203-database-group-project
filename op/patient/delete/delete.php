@@ -8,7 +8,7 @@ if(isset($_SESSION['username'])){
 
     if(isset($_GET['id']) && !empty($_GET['id'])){
 
-    $sql = "DELETE FROM employee WHERE emp_id = '{$_GET['id']}';";
+    $sql = "DELETE FROM patient WHERE patient_id = '{$_GET['id']}';";
     $conn = mysqli_connect($hostname, $username, $password, $db_name);
     if(mysqli_query($conn, $sql)){
         echo 'success';

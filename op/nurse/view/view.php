@@ -6,7 +6,7 @@
     include "../../../config/db.php";
 
     $conn = mysqli_connect($hostname, $username, $password, $db_name);
-    $sql = "SELECT d.doctor_id,d.dea_no,e.name, e.contact_no, e.emp_id FROM doctor d, employee e WHERE d.emp_id = e.emp_id;";
+    $sql = "SELECT n.nurse_id, m.council_regno ,e.name, e.contact_no, e.emp_id FROM nurse n, employee e, medical_staff m WHERE n.emp_id = e.emp_id AND n.emp_id = m.emp_id;";
     $result = mysqli_query($conn, $sql);
 
 ?>
@@ -72,7 +72,7 @@ button{
   <tr>
     <th>ID</th>
     <th>Name</th>
-    <th>DEA No</th>
+    <th>council No</th>
     <th>Mobile</th>
     <th>Update</th>
     <th>Delete</th>
@@ -81,11 +81,11 @@ button{
     if(mysqli_num_rows($result)>0){
         while($row = mysqli_fetch_assoc($result)){
             echo "<tr>";
-            echo "<td>".$row['doctor_id']."</td>";
-            echo "<td><a href='doctor.php?doctor_id=".$row['doctor_id']."' class='lin'>".$row['name']."</a></td>";
-            echo "<td>".$row['dea_no']."</td>";
+            echo "<td>".$row['nurse_id']."</td>";
+            echo "<td>".$row['name']."</a></td>";
+            echo "<td>".$row['council_regno']."</td>";
             echo "<td>".$row['contact_no']."</td>";
-            echo "<td><a href='../update/form.php?id=".$row['doctor_id']."'>Update</a></td>";
+            echo "<td><a href='../update/form.php?id=".$row['nurse_id']."'>Update</a></td>";
             echo "<td><a href='../delete/delete.php?id=".$row['emp_id']."'>Delete</a></td>";
             echo "</tr>";
         }

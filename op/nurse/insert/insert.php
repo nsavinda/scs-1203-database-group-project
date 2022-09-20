@@ -6,7 +6,7 @@ if(isset($_SESSION['username'])){
     $username = $_SESSION['username'];
     $password = $_SESSION['password'];
 
-    if (isset($_POST['name']) && isset($_POST['address']) && isset($_POST['mobile']) && isset($_POST['dea'])) {
+    if (isset($_POST['name']) && isset($_POST['address']) && isset($_POST['mobile']) ) {
 
         function test_input($data) {
         $data = trim($data);
@@ -18,12 +18,11 @@ if(isset($_SESSION['username'])){
 	$name = test_input($_POST['name']);
 	$address = test_input($_POST['address']);
     $mobile = test_input($_POST['mobile']);
-    $dea = test_input($_POST['dea']);
     $council = test_input($_POST['council']);
     $jdate = $_POST['jdate'];
     $rdate = $_POST['rdate'];
 
-	if (empty($name) || empty($address) || empty($mobile) || empty($dea)) {
+	if (empty($name) || empty($address) || empty($mobile)) {
 		header("Location: ../login.php?error=All data are Required");
 	}else {
 
@@ -36,7 +35,7 @@ if(isset($_SESSION['username'])){
             if(mysqli_query($conn, $sql)){
                 $emp_id = mysqli_insert_id($conn);
                 $sql1 = "INSERT INTO medical_staff (council_regno,joined_date,resign_date,emp_id) VALUES ('$council','$jdate','$rdate','$emp_id')";
-                $sql2 = "INSERT INTO doctor(dea_no,emp_id) VALUES ('$dea', '$emp_id')";
+                $sql2 = "INSERT INTO nurse(emp_id) VALUES ('$emp_id')";
                 if(mysqli_query($conn, $sql1) && mysqli_query($conn, $sql2)){
 
                     echo "Success";

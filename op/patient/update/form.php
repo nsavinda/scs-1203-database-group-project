@@ -12,7 +12,7 @@
    
       
       $conn = mysqli_connect($hostname, $username, $password, $db_name);
-      $sql = "SELECT d.doctor_id,d.dea_no,e.emp_id ,e.name,e.address, e.contact_no, m.council_regno, m.joined_date, m.resign_date FROM doctor d, employee e, medical_staff m WHERE d.doctor_id = $id AND d.emp_id = e.emp_id AND d.emp_id = m.emp_id;";
+      $sql = "SELECT name,admitted_date,admitted_time,ward_no,bed_id FROM patient WHERE patient_id = $id ;";
       $result = mysqli_query($conn, $sql);
       if(mysqli_num_rows($result)>0){
         $row = mysqli_fetch_assoc($result);
@@ -93,25 +93,26 @@ input[type=submit]:hover {
 
 
 
-<h2>Doctor</h2>
+<h1>Patients</h1>
 
 <div class="container">
   <form action="update.php" method="POST">
-  <input type="hidden" id="id" name="id" value="<?=$row['emp_id']?>">
+  <input type="hidden" id="id" name="id" value="<?=$id?>">
+
   <div class="row">
     <div class="col-25">
       <label for="name">Name</label>
     </div>
     <div class="col-75">
-      <input type="text" id="name" name="name" placeholder="Name.." value="<?=$row['name']?>">
+      <input type="text" id="name" name="name" placeholder="Name.." value="<?=$row['name']?>" >
     </div>
   </div>
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-25">
       <label for="address">Address</label>
     </div>
     <div class="col-75">
-      <input type="text" id="address" name="address" placeholder="Address.." value="<?=$row['address']?>" >
+      <input type="text" id="address" name="address" placeholder="Address..">
     </div>
   </div>
   <div class="row">
@@ -119,7 +120,7 @@ input[type=submit]:hover {
       <label for="mobile">Mobile number</label>
     </div>
     <div class="col-75">
-      <input type="text" id="mobile" name="mobile" placeholder="Mobile number.." value="<?=$row['contact_no']?>" >
+      <input type="text" id="mobile" name="mobile" placeholder="Mobile number..">
     </div>
   </div>
 
@@ -128,33 +129,42 @@ input[type=submit]:hover {
       <label for="council">Medical council registration number</label>
     </div>
     <div class="col-75">
-      <input type="text" id="council" name="council" placeholder="Medical council registration number.." value="<?=$row['council_regno']?>">
+      <input type="text" id="council" name="council" placeholder="Medical council registration number..">
+    </div>
+  </div> -->
+
+  <div class="row">
+    <div class="col-25">
+      <label for="admitted_date">Admitted date</label>
+    </div>
+    <div class="col-75">
+      <input type="date" id="admitted_date" name="admitted_date" value="<?=$row['admitted_date']?>">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-25">
+      <label for="resign_date">Admitted time</label>
+    </div>
+    <div class="col-75">
+      <input type="time" id="resign_date" name="admitted_time" value="<?=$row['admitted_time']?>">
     </div>
   </div>
 
   <div class="row">
     <div class="col-25">
-      <label for="joined_date">Joined date</label>
+      <label for="dea">Ward no</label>
     </div>
     <div class="col-75">
-      <input type="date" id="joined_date" name="jdate" value="<?=$row['joined_date']?>">
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-25">
-      <label for="resign_date">Resign date</label>
-    </div>
-    <div class="col-75">
-      <input type="date" id="resign_date" name="rdate"  value="<?=$row['resign_date']?>">
+      <input type="text" id="ward_no" name="ward_no" placeholder="Ward no"  value="<?=$row['ward_no']?>" >
     </div>
   </div>
 
   <div class="row">
     <div class="col-25">
-      <label for="dea">DEA number</label>
+      <label for="dea">Bed no</label>
     </div>
     <div class="col-75">
-      <input type="text" id="dea" name="dea" placeholder="DEA number.." value="<?=$row['dea_no']?>" >
+      <input type="text" id="Bed_no" name="bed_id" placeholder="bed no" value="<?=$row['bed_id'] ?>">
     </div>
   </div>
 
@@ -167,11 +177,12 @@ input[type=submit]:hover {
     </div>
   </div> -->
   <br>
-  <div class="row">
+  <div class="row" id="but">
     <input type="submit" value="Submit">
   </div>
   </form>
 </div>
+
 
 
 

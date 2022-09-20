@@ -139,14 +139,7 @@ h1{
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-25">
-      <label for="dea">DEA number</label>
-    </div>
-    <div class="col-75">
-      <input type="text" id="dea" name="dea" placeholder="DEA number..">
-    </div>
-  </div>
+
 
   <!-- <div class="row">
     <div class="col-25">
