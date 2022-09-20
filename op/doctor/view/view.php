@@ -2,7 +2,7 @@
 
 
     include("../../../template/header.php");
-
+    include("../../../permission/doctor.php");
     include "../../../config/db.php";
 
     $conn = mysqli_connect($hostname, $username, $password, $db_name);
