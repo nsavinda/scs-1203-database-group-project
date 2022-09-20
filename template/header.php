@@ -1,6 +1,26 @@
 <?php
 // include './config/db.php';
 session_start();
+
+
+
+
+// include './functions/check_role.php';
+
+function check_role(){
+  if(!strcmp($_SESSION['username'],"admin")){
+      return 1;
+
+  }else if(!strcmp($_SESSION['username'],"doctor")){ 
+      return 2;
+}else if(!strcmp($_SESSION['username'],"nurse")){  
+  return 3;  
+}else if(!strcmp($_SESSION['username'],"nirmal")){
+  return 4;
+}else return 0;
+}
+
+
 if(isset($_SESSION['username']) ) { 
     $username = $_SESSION['username'];
     $password = $_SESSION['password'];
@@ -46,6 +66,7 @@ li a:hover:not(.active) {
   <li><a href="#home">Home</a></li>
   <li><a href="#news">News</a></li>
   <li><a href="logout.php">Logout</a></li>
+  <li><a href="logout.php"><?php echo check_role(); ?></a></li>
   <li style="float:right"><a class="active" href="#about"><?=$username?></a></li>
 </ul>
 

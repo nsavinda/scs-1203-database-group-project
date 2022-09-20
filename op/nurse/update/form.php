@@ -12,7 +12,7 @@
    
       
       $conn = mysqli_connect($hostname, $username, $password, $db_name);
-      $sql = "SELECT d.doctor_id,d.dea_no,e.emp_id ,e.name,e.address, e.contact_no, m.council_regno, m.joined_date, m.resign_date FROM doctor d, employee e, medical_staff m WHERE d.doctor_id = $id AND d.emp_id = e.emp_id AND d.emp_id = m.emp_id;";
+      $sql = "SELECT n.nurse_id,e.emp_id ,e.name,e.address, e.contact_no, m.council_regno, m.joined_date, m.resign_date FROM nurse n, employee e, medical_staff m WHERE n.nurse_id = $id AND n.emp_id = e.emp_id AND n.emp_id = m.emp_id;";
       $result = mysqli_query($conn, $sql);
       if(mysqli_num_rows($result)>0){
         $row = mysqli_fetch_assoc($result);
@@ -149,14 +149,6 @@ input[type=submit]:hover {
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-25">
-      <label for="dea">DEA number</label>
-    </div>
-    <div class="col-75">
-      <input type="text" id="dea" name="dea" placeholder="DEA number.." value="<?=$row['dea_no']?>" >
-    </div>
-  </div>
 
   <!-- <div class="row">
     <div class="col-25">

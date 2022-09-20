@@ -6,7 +6,7 @@ if(isset($_SESSION['username'])){
     $username = $_SESSION['username'];
     $password = $_SESSION['password'];
 
-    if (isset($_POST['name']) && isset($_POST['address']) && isset($_POST['mobile']) && isset($_POST['dea']) && isset($_POST['council']) && isset($_POST['jdate']) && isset($_POST['rdate']) && isset($_POST['id']) ){
+    if (isset($_POST['name']) && isset($_POST['address']) && isset($_POST['mobile']) && isset($_POST['council']) && isset($_POST['jdate']) && isset($_POST['rdate']) && isset($_POST['id']) ){
 
         function test_input($data) {
         $data = trim($data);
@@ -18,13 +18,13 @@ if(isset($_SESSION['username'])){
 	$name = test_input($_POST['name']);
 	$address = test_input($_POST['address']);
     $mobile = test_input($_POST['mobile']);
-    $dea = test_input($_POST['dea']);
+    // $dea = test_input($_POST['dea']);
     $council = test_input($_POST['council']);
     $jdate = $_POST['jdate'];
     $rdate = $_POST['rdate'];
     $id = $_POST['id'];
 
-	if (empty($name) || empty($address) || empty($mobile) || empty($dea)) {
+	if (empty($name) || empty($address) || empty($mobile)) {
 		header("Location: ../login.php?error=All data are Required");
 	}else {
 
@@ -34,9 +34,8 @@ if(isset($_SESSION['username'])){
             echo "Connected to database";
             $sql = "UPDATE employee SET name='$name', address='$address',contact_no = '$mobile' WHERE emp_id = '$id'";
             $sql1 = "UPDATE medical_staff SET council_regno='$council',joined_date='$jdate', resign_date = '$rdate' WHERE emp_id = '$id'";
-            $sql2 = "UPDATE doctor SET dea_no='$dea' WHERE emp_id = '$id'";
             // $sql = "INSERT INTO employee (name, address, contact_no) VALUES ('$name', '$address', '$mobile')";
-            if(mysqli_query($conn, $sql) && mysqli_query($conn, $sql1) && mysqli_query($conn, $sql2)){
+            if(mysqli_query($conn, $sql) && mysqli_query($conn, $sql1)){
                 echo "Success";
                 header("Location: ../view/view.php");
 
