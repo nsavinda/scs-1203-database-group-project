@@ -2,6 +2,8 @@
 
 
     include("../../../template/header.php");
+    include("../../../permission/doctor.php");
+
 
 
 ?>

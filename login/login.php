@@ -2,7 +2,7 @@
 session_start();
 include "../config/db.php";
 
-if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['role'])) {
+if (isset($_POST['username']) && isset($_POST['password'])) {
 
 	function test_input($data) {
 	  $data = trim($data);

@@ -1,6 +1,8 @@
 <?php
       include("../../../template/header.php");
       include "../../../config/db.php";
+      include("../../../permission/doctor.php");
+
 
       if(isset($_SESSION['username'])){
   $username = $_SESSION['username'];

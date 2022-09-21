@@ -1,5 +1,6 @@
 <?php  
-session_start();
+      include("../../../template/header.php");
+      include("../../../permission/patient.php");
 include "../../../config/db.php";
 
 if(isset($_SESSION['username'])){

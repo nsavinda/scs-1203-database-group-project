@@ -1,6 +1,6 @@
 <?php   
 
-if(!(check_role() == 1 || check_role() == 4)){
+if(!(check_role() == 1 || check_role() == 2 || check_role() == 3)){
     header('location:/index.php');
 }
 

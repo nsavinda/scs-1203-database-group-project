@@ -2,6 +2,7 @@
 
 
     include("../../../template/header.php");
+    include("../../../permission/patient.php");
 
     include "../../../config/db.php";
 
@@ -63,8 +64,9 @@ button{
 
 
 <h1>Nurses</h1>
-
+ <?php if(check_role() == 1 || check_role() == 3){ ?>
 <a href="../insert/form.php"><div id="button"><button>Insert</button></div></a >
+<?php } ?>
 <br />
 <br />
 
@@ -74,8 +76,10 @@ button{
     <th>Name</th>
     <th>council No</th>
     <th>Mobile</th>
+    <?php if(check_role() == 1 || check_role() == 3) { ?>
     <th>Update</th>
     <th>Delete</th>
+    <?php } ?>
   </tr>
   <?php 
     if(mysqli_num_rows($result)>0){
@@ -85,8 +89,10 @@ button{
             echo "<td>".$row['name']."</a></td>";
             echo "<td>".$row['council_regno']."</td>";
             echo "<td>".$row['contact_no']."</td>";
+            if(check_role() == 1 || check_role() == 3){
             echo "<td><a href='../update/form.php?id=".$row['nurse_id']."'>Update</a></td>";
             echo "<td><a href='../delete/delete.php?id=".$row['emp_id']."'>Delete</a></td>";
+            }
             echo "</tr>";
         }
     }

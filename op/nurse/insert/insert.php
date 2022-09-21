@@ -1,6 +1,7 @@
 <?php  
-session_start();
-include "../../../config/db.php";
+      include("../../../template/header.php");
+      include("../../../permission/nurse.php");
+      include "../../../config/db.php";
 
 if(isset($_SESSION['username'])){
     $username = $_SESSION['username'];

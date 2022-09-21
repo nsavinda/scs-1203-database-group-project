@@ -15,8 +15,7 @@ function check_role(){
       return 2;
 }else if(!strcmp($_SESSION['username'],"nurse")){  
   return 3;  
-}else if(!strcmp($_SESSION['username'],"nirmal")){
-  return 4;
+
 }else return 0;
 }
 
@@ -63,10 +62,10 @@ li a:hover:not(.active) {
 <body>
 
 <ul>
-  <li><a href="#home">Home</a></li>
-  <li><a href="#news">News</a></li>
-  <li><a href="logout.php">Logout</a></li>
-  <li><a href="logout.php"><?php echo check_role(); ?></a></li>
+  <li><a href="/index.php">Home</a></li>
+  <!-- <li><a href="#news">News</a></li> -->
+  <li><a href="/logout.php">Logout</a></li>
+  <!-- <li><a href="logout.php"><?php echo check_role(); ?></a></li> -->
   <li style="float:right"><a class="active" href="#about"><?=$username?></a></li>
 </ul>
 
